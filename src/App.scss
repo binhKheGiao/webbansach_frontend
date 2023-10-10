@@ -1,0 +1,17 @@
+*{
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+}
+
+.book-hover {
+  text-decoration: none;
+}
+
+.book-hover:hover{
+  border: 1px solid #cccc;
+  border-top: none;
+   box-shadow: 0 0 5px #cccc;
+
+}
