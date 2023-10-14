@@ -1,10 +1,11 @@
 import React, {useEffect, useState} from 'react';
-import Book from "../../models/Book";
+
 import BookProps from "./component/BookProps";
 import BookModel from "../../models/BookModel";
 import {getAllBooks} from "../../api/SachAPI";
 import {Simulate} from "react-dom/test-utils";
 import error = Simulate.error;
+import {Pagination} from "../ultils/PaginationConfix";
 
 const ListProduct: React.FC = () => {
 
@@ -14,11 +15,24 @@ const ListProduct: React.FC = () => {
 
     const [baoLoi, setBaoLoi] = useState(null);
 
+    const [currentPage, setCurrentPage] = useState(1);
+
+    const [totalPage, setTotalPage] = useState(0);
+
+    const [sizeItemPage, setSizeItemPage]  = useState(0);
+
+    const pagination = (page : number) => {
+        setCurrentPage(page);
+    }   
+
     useEffect(() => {
-        getAllBooks().then(
+        getAllBooks(currentPage-1).then(
             data => {
-                setProductList(data);
+                setProductList(data.result);
                 setDangTaiDuLieu(false);
+                console.log("tổng số trang" +data.totalPage);
+                setTotalPage(data.totalPage);
+
             }
         ).catch(
             error => {
@@ -26,7 +40,7 @@ const ListProduct: React.FC = () => {
             }
         )
 
-    }, []) // Chỉ gọi 1 lần
+    }, [currentPage]) // Chỉ gọi 1 lần
 
     if (dangTaiDuLieu) {
         return (
@@ -46,15 +60,13 @@ const ListProduct: React.FC = () => {
     }
     return (
         <div className={'container'}>
-            <div className={"row mt-4"}>
+            <div className={"row mb-4 mt-4"}>
                 {
                     productList.map((book) => (
                         <BookProps key={book.maSach} book={book}/>
                     ))
                 }
             </div>
-
-
         </div>
     );
 

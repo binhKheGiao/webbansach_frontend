@@ -5,15 +5,22 @@ import Navbar from './layouts/header-footer/Navbar';
 import HomePage from './layouts/home/HomePage';
 import Footer from "./layouts/header-footer/Footer";
 import {getAllBooks} from "./api/SachAPI";
+import HeaderBaner from './layouts/header-footer/HeaderBaner';
+import ListProduct from './layouts/product/ListProduct';
 
 function App() {
-    getAllBooks().then().catch();
+   
   return (
-    <div className={'container'}>
+    <>
+    <HeaderBaner/>
+     <div className={'container'}>
       <Navbar/>
       <HomePage/>
-      {/*<Footer/>*/}
+      <ListProduct/>
+      <Footer/>
     </div>
+    </>
+   
   );
 }
 

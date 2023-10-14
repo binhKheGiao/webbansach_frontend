@@ -5,9 +5,10 @@ import error = Simulate.error;
 import {getAllBooks} from "../../../api/SachAPI";
 import BookModel from "../../../models/BookModel";
 import BookProps from "../../product/component/BookProps";
+import ResultAPI from "../../../api/ResultAPI";
 
 
-interface Props { fetchBooks: () => Promise<BookModel[]>; }
+interface Props { fetchBooks: () => Promise<ResultAPI>; }
 
 //  Nếu không FeaturedProducts: React.FC<Props> nếu không thì sẽ chỉ là component rỗng
 const FeaturedProducts: React.FC<Props> = ({fetchBooks}) => {
@@ -22,7 +23,7 @@ const FeaturedProducts: React.FC<Props> = ({fetchBooks}) => {
     useEffect(() => {
         fetchBooks().then(
             data => {
-                setProductList(data);
+                setProductList(data.result);
                 setDangTaiDuLieu(false);
             }
         ).catch(
@@ -58,7 +59,7 @@ const FeaturedProducts: React.FC<Props> = ({fetchBooks}) => {
                     ))
                 }
             </div>
-            <div className={'mt-2 mb-3 d-flex justify-content-around align-items-center'}>
+            <div className={'mt-3 mb-4 d-flex justify-content-around align-items-center'}>
                 <button  type="button" className="btn btn-outline-danger">Xem thêm</button>
             </div>
         </div>

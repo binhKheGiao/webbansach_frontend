@@ -46,7 +46,7 @@ const Navbar = () => {
       {/* Tìm kiếm */}
       <form className="d-flex">
         <input className="form-control me-2" type="search" placeholder="Tìm kiếm" aria-label="Search" />
-        <button className="btn btn-outline-warning" type="submit">Search</button>
+        <button className="btn btn-outline-pr" type="submit">Search</button>
       </form>
 
       {/* Biểu tượng giỏ hàng */}
