@@ -4,8 +4,9 @@ import BookProps from "./component/BookProps";
 import BookModel from "../../models/BookModel";
 import {getAllBooks} from "../../api/SachAPI";
 import {Simulate} from "react-dom/test-utils";
+import Pagination from "@mui/material/Pagination";
 import error = Simulate.error;
-import {Pagination} from "../ultils/PaginationConfix";
+
 
 const ListProduct: React.FC = () => {
 
@@ -67,6 +68,7 @@ const ListProduct: React.FC = () => {
                     ))
                 }
             </div>
+            <Pagination page={currentPage} count={totalPage} color="secondary" />  
         </div>
     );
 

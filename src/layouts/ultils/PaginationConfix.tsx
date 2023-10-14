@@ -7,7 +7,7 @@ interface PaginationInterface {
     Pagination: any;
 }
 
-export const Pagination: React.FC<PaginationInterface> = (props) => {
+export const PaginationConfix: React.FC<PaginationInterface> = (props) => {
     const listOfPage = [];
 
     console.log("Trang hiện tại" +props.currentPage);
