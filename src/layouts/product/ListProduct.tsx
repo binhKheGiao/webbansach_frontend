@@ -1,11 +1,12 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 
 import BookProps from "./component/BookProps";
 import BookModel from "../../models/BookModel";
-import {getAllBooks} from "../../api/SachAPI";
-import {Simulate} from "react-dom/test-utils";
+import { getAllBooks } from "../../api/SachAPI";
+import { Simulate } from "react-dom/test-utils";
 import Pagination from "@mui/material/Pagination";
 import error = Simulate.error;
+import { Box } from '@mui/material';
 
 
 const ListProduct: React.FC = () => {
@@ -20,11 +21,16 @@ const ListProduct: React.FC = () => {
 
     const [totalPage, setTotalPage] = useState(0);
 
-    const [sizeItemPage, setSizeItemPage]  = useState(0);
+    const [sizeItemPage, setSizeItemPage] = useState(0);
 
-    const pagination = (page : number) => {
+    // const pagination = (page : number) => {
+    //     setCurrentPage(page);
+    // }  
+
+    const handleChange = (event: any, page: number) => {
+        // Cập nhật state của currentPage bằng value
         setCurrentPage(page);
-    }   
+    };
 
     useEffect(() => {
         getAllBooks(currentPage-1).then(
@@ -44,15 +50,20 @@ const ListProduct: React.FC = () => {
     }, [currentPage]) // Chỉ gọi 1 lần
 
     if (dangTaiDuLieu) {
+        console.log('tai du lieu');
         return (
-            <div>
-                <h1>Đang tải dữ liệu</h1>
+            <div className='d-flex align-items-center justify-content-center'  >
+               
+                <div className="spinner-border text-danger" role="status">
+                    <span className="visually-hidden">Loading...</span>
+                </div>
             </div>
         )
     }
 
     if (baoLoi) {
         return (
+
             <div>
                 <h1>Gặp lỗi : {baoLoi}</h1>
             </div>
@@ -64,14 +75,18 @@ const ListProduct: React.FC = () => {
             <div className={"row mb-4 mt-4"}>
                 {
                     productList.map((book) => (
-                        <BookProps key={book.maSach} book={book}/>
+                        <BookProps key={book.maSach} book={book} />
                     ))
                 }
             </div>
-            <Pagination page={currentPage} count={totalPage} color="secondary" />  
+            <Box display="flex" justifyContent="center">
+                <Pagination page={currentPage} onChange={handleChange} shape="rounded" count={totalPage} color="secondary" />
+            </Box>
         </div>
     );
 
 }
 
-export default ListProduct;
+
+
+export default ListProduct

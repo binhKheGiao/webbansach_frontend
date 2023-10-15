@@ -32,7 +32,17 @@ export async function  getFlashSaleBook() :Promise<ResultAPI> {
 export async function getAllBooks(page: number):Promise<ResultAPI> {    // Hoạt động bất độ
     console.log("page ở call api" +page);
     
-    const url:string = `http://localhost:8080/sach?sort=maSach,desc&size=6&page=${page}`;
+    const url:string = `http://localhost:8080/sach?sort=maSach,desc&size=12&page=${page}`;
 
     return getBook(url);
 }
+
+
+export  async function   getBookBySearchValue(value:string) :Promise<ResultAPI> {
+    
+    const url:string = `http://localhost:8080/sach?sort=maSach,desc&size=12&page=${value}`;
+
+
+    return getBook(url);
+}
+

@@ -36,8 +36,11 @@ const FeaturedProducts: React.FC<Props> = ({fetchBooks}) => {
 
     if (dangTaiDuLieu) {
         return (
-            <div>
-                <h1>Đang tải dữ liệu</h1>
+            <div className='d-flex mt-5 mb-5 align-items-center justify-content-center'  >
+               
+                <div className="spinner-border text-danger" role="status">
+                    <span className="visually-hidden">Loading...</span>
+                </div>
             </div>
         )
     }
