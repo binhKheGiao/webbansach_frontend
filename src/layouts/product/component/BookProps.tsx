@@ -7,7 +7,7 @@ import {getAllImageByIdBook} from "../../../api/ImageAPI";
 import IImageModel from "../../../models/IImageModel";
 
 interface BookPropsInterface {
-    // Có thể truyền nhiều biến
+    
     book: BookModel;
 }
 
@@ -30,7 +30,6 @@ const BookProps: React.FC<BookPropsInterface> = (props) => {
         getAllImageByIdBook(bookId).then(
             imageData => {
                 setImageList(imageData);
-                console.log("danh sác hình ảnh lấy được ", imageList);
                 setLoadingData(false);
             }
         ).catch(

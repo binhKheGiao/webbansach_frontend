@@ -50,7 +50,6 @@ const ListProduct: React.FC = () => {
     }, [currentPage]) // Chỉ gọi 1 lần
 
     if (dangTaiDuLieu) {
-        console.log('tai du lieu');
         return (
             <div className='d-flex align-items-center justify-content-center'  >
                

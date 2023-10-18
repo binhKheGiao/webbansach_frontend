@@ -1,10 +1,11 @@
 import BookModel from "../models/BookModel";
-import {getRequest} from "./Request";
-import {promises} from "dns";
+import { getRequest } from "./Request";
+import { promises } from "dns";
 import ResultAPI from "./ResultAPI";
+import { log } from "console";
 
 
-async function getBook(url : string) :Promise<ResultAPI> {
+async function getBook(url: string): Promise<ResultAPI> {
 
     // const result:BookModel[] = []; // Biến lưu giá trị trả về
 
@@ -13,35 +14,40 @@ async function getBook(url : string) :Promise<ResultAPI> {
     const responseData = reponse._embedded.saches;
 
     // Lấy thông tin trang
-    const totalPage:number = reponse.page.totalPages;
-    const totalBook:number = reponse.page.totalElements;
-    return {result: responseData,totalPage : totalPage, totalBook:totalBook};
+    const totalPage: number = reponse.page.totalPages;
+    const totalBook: number = reponse.page.totalElements;
+    return { result: responseData, totalPage: totalPage, totalBook: totalBook };
 
 }
 
-export async function  getTheLatestBook() :Promise<ResultAPI> {
+export async function getTheLatestBook(): Promise<ResultAPI> {
     // Lấy sản phẩm được bán ít nhất tháng trước ra làm flash sale hoặc là sản phẩm do admin set
     const url: string = 'http://localhost:8080/sach?sort=maSach,asc&page=0&size=6';
     return getBook(url);
 }
-export async function  getFlashSaleBook() :Promise<ResultAPI> {
+export async function getFlashSaleBook(): Promise<ResultAPI> {
     const url: string = 'http://localhost:8080/sach?sort=maSach,desc&page=0&size=6';
     return getBook(url);
 }
 
-export async function getAllBooks(page: number):Promise<ResultAPI> {    // Hoạt động bất độ
-    console.log("page ở call api" +page);
-    
-    const url:string = `http://localhost:8080/sach?sort=maSach,desc&size=12&page=${page}`;
+export async function getAllBooks(page: number): Promise<ResultAPI> {    // Hoạt động bất độ
+    console.log("page ở call api" + page);
+
+    const url: string = `http://localhost:8080/sach?sort=maSach,desc&size=12&page=${page}`;
 
     return getBook(url);
 }
 
 
-export  async function   getBookBySearchValue(value:string) :Promise<ResultAPI> {
-    
-    const url:string = `http://localhost:8080/sach?sort=maSach,desc&size=12&page=${value}`;
+export async function getBookBySearchValue(value: string): Promise<ResultAPI> {
 
+    let url: string = `http://localhost:8080`;
+
+    if (value !== '') {
+        url = `http://localhost:8080/sach/search/findByTenSachContaining?sort=maSach,desc&size=8&page=0&tenSach=${value}`;
+        console.log("Call api");
+        
+    }
 
     return getBook(url);
 }
