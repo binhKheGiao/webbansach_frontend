@@ -17,8 +17,7 @@ const Navbar = () => {
   const [imageList, setImageList] = useState<IImageModel[]>([])
 
   const [productList, setProductList] = useState<BookModel[]>([])
-  // Gọi hàm khi ô search thay đổi
-  // lấy được giá trị của input gửi in put về 
+
   const onSearchInputChange = (e: ChangeEvent<HTMLInputElement>) => {
 
     let query = e.target.value.trim();
@@ -55,32 +54,11 @@ const Navbar = () => {
     };
   }, [querySearch, debouncedSearch]);
 
- 
- 
-
-  // useEffect(() => {
-  //   getBookBySearchValue(querySearch).then(
-  //     data => {
-  //       console.log(data.result);
-  //       setProductList(data.result);
-  //     }
-  //   ).catch(
-  //     error => {
-  //       console.log('có lỗi');
-
-  //     }
-  //   )
-
-  // }, [querySearch])
-
-
-
-
 
 
   return (
 
-    <nav className="navbar navbar-expand-lg navbar-light bg-light">
+    <nav className="navbar navbar-expand-lg bg-light navbar-light bg-light">
       <div className="container-fluid">
         <a className="navbar-brand" href="#">
           <img src="https://cdn0.fahasa.com/skin/frontend/ma_vanese/fahasa/images/fahasa-logo.png" width="250px" height='50px' alt="" />
@@ -99,9 +77,9 @@ const Navbar = () => {
                 Thể loại sách
               </a>
               <ul className="dropdown-menu" aria-labelledby="navbarDropdown1">
-                <li><a className="dropdown-item" href="#">Thể loại 1</a></li>
-                <li><a className="dropdown-item" href="#">Thể loại 2</a></li>
-                <li><a className="dropdown-item" href="#">Thể loại 3</a></li>
+                <li><a className="dropdown-item" href="1">Thể loại 1</a></li>
+                <li><a className="dropdown-item" href="2">Thể loại 2</a></li>
+                <li><a className="dropdown-item" href="3">Thể loại 3</a></li>
               </ul>
             </li>
             <li className="nav-item dropdown">

@@ -1,11 +1,14 @@
 import React from 'react'
 
-const List = () => {
+const FilterProducts = () => {
   return (
     <div>
+        
+
       
     </div>
   )
 }
 
-export default List
+export default FilterProducts
+

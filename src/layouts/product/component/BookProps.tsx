@@ -1,13 +1,14 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import Book from "../../../models/Book";
 import BookModel from "../../../models/BookModel";
 import ImageModel from "../../../models/ImageModel";
-import {getAllImageByIdBook} from "../../../api/ImageAPI";
+import { getAllImageByIdBook } from "../../../api/ImageAPI";
 import IImageModel from "../../../models/IImageModel";
+import { Link } from 'react-router-dom';
 
 interface BookPropsInterface {
-    
+
     book: BookModel;
 }
 
@@ -79,48 +80,55 @@ const BookProps: React.FC<BookPropsInterface> = (props) => {
 
 
     return (
-        <a href={"#"} className="col-md-2 book-hover " >
+        <div >
             <div className="card border-0 p-2 ">
+                <Link className='' style={{ 'textDecoration': 'none', 'color':'black' }}  to={`/san-phams/${props.book.maSach}`}  >
+                    <img 
+                        src={`${bookAvata}`}
+                        className="card-img-top d-block ms-auto me-auto"
+                        alt={""}
+                        style={{ height: '200px', width: '180px' }}
+                    />
+                    <div className="card-body">
+                        <h6 className="card-title text-truncate">{props.book.tenSach}</h6>
+                        <p className="card-text  text-truncate">{props.book.moTa}</p>
+                        <div className="price d-block">
+                            <span className="original-price">
+                                <strong className={'text-danger text-orgin-price'}>
+                                    {props.book.giaBan != (undefined || null) ? formattedPrice(props.book.giaBan) : formattedPrice(0)}
+                                </strong>
+                            </span>
+                            <br />
+                            <span className="discounted-price">
+                                <del className={'text-discounted'}>
+                                    {props.book.giaNiemYet != (undefined || null) ? formattedPrice(props.book.giaNiemYet) : formattedPrice(0)}
+                                </del>
+                            </span>
+                        </div>
 
-                <img
-                    src={`${bookAvata}`}
-                    className="card-img-top m-auto"
-                    alt={""}
-                    style={{height: '200px', width: '180px'}}
-                />
-                <div className="card-body">
-                    <h6 className="card-title text-truncate">{props.book.tenSach}</h6>
-                    <p className="card-text  text-truncate">{props.book.moTa}</p>
-                    <div className="price d-block">
-                        <span className="original-price">
-                           <strong className={'text-danger text-orgin-price'}>
-                               {props.book.giaBan != (undefined || null) ? formattedPrice(props.book.giaBan) : formattedPrice(0)}
-                           </strong>
-                        </span>
-                        <br/>
-                        <span className="discounted-price">
-                             <del className={'text-discounted'}>
-                                 {props.book.giaNiemYet != (undefined || null) ? formattedPrice(props.book.giaNiemYet) : formattedPrice(0)}
-                             </del>
-                        </span>
                     </div>
-                    <div className="row mt-2" role="group">
-                        <div className="col-6">
-                            <a href="#" className="btn  btn-secondary btn-block">
-                                <i className="fas fa-heart"></i>
 
-                            </a>
-                        </div>
-                        <div className="col-6">
-                            <button className="btn btn-danger btn-block">
-                                <i className="fas fa-shopping-cart"></i>
-                            </button>
-                        </div>
+                </Link>
+
+
+
+                <div className="d-flex align-items-center  p-0 justify-content-around" role="group">
+                    <div className=" p-0">
+                        <a href="#" className="btn  btn-secondary btn-block">
+                            <i className="fas fa-heart"></i>
+
+                        </a>
+                    </div>
+                    <div className=" p-0">
+                        <button className="btn btn-danger btn-block">
+                            <i className="fas fa-shopping-cart"></i>
+                        </button>
                     </div>
                 </div>
 
+
             </div>
-        </a>
+        </div>
     );
 };
 

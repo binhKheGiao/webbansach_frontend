@@ -33,12 +33,13 @@ const ListProduct: React.FC = () => {
     };
 
     useEffect(() => {
-        getAllBooks(currentPage-1).then(
+        getAllBooks(currentPage - 1).then(
             data => {
                 setProductList(data.result);
                 setDangTaiDuLieu(false);
-                console.log("tổng số trang" +data.totalPage);
+                console.log("tổng số trang" + data.totalPage);
                 setTotalPage(data.totalPage);
+                window.scrollTo(0, 150)
 
             }
         ).catch(
@@ -52,7 +53,7 @@ const ListProduct: React.FC = () => {
     if (dangTaiDuLieu) {
         return (
             <div className='d-flex align-items-center justify-content-center'  >
-               
+
                 <div className="spinner-border text-danger" role="status">
                     <span className="visually-hidden">Loading...</span>
                 </div>
@@ -70,17 +71,86 @@ const ListProduct: React.FC = () => {
         )
     }
     return (
-        <div className={'container'}>
-            <div className={"row mb-4 mt-4"}>
-                {
-                    productList.map((book) => (
-                        <BookProps key={book.maSach} book={book} />
-                    ))
-                }
+        <div className={'container row p-0'}>
+            <div className='col-md-4   p-4  p-0'>
+                <div className='ms-2  '>
+                    <h6>Danh mục sản phẩm</h6>
+                    <div className='ms-3 d-flex flex-column'>
+                        <span>English Book</span>
+                        <span>Sách Tiếng Việt</span>
+                    </div>
+                </div>
+                <div className='ms-2'>
+                    <h6>Thương Hiệu</h6>
+                    <div className='ms-3'>
+                        <div className="form-check">
+                            <input className="form-check-input" type="checkbox" value="" id="flexCheckChecked" />
+                            <label className="form-check-label" >
+                                Default checkbox
+                            </label>
+                        </div>
+                        <div className="form-check">
+                            <input className="form-check-input" type="checkbox" value="" id="flexCheckChecked" />
+                            <label className="form-check-label" >
+                                Checked checkbox
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div className='ms-2'>
+                    <h6>Khoảng Giá</h6>
+                    <div className='ms-3'>
+                        <div className="form-check">
+
+                            <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+                            <label className="form-check-label" >
+                                0đ - 150,000đ
+                            </label>
+                        </div>
+                        <div className="form-check">
+                            <input className="form-check-input" type="checkbox" value="" id="flexCheckChecked" />
+                            <label className="form-check-label" >
+                                150,000đ - 300,000đ
+                            </label>
+                        </div>
+                        <div className="form-check">
+                            <input className="form-check-input" type="checkbox" value="" id="flexCheckChecked" />
+                            <label className="form-check-label" >
+                                300,000đ - 500,000đ
+                            </label>
+                        </div>
+                        <div className="form-check">
+                            <input className="form-check-input" type="checkbox" value="" id="flexCheckChecked" />
+                            <label className="form-check-label" >
+                                500,000đ - 700,000đ
+                            </label>
+                        </div>
+                        <div className="form-check">
+                            <input className="form-check-input" type="checkbox" value="" id="flexCheckChecked" />
+                            <label className="form-check-label" >
+                                700,000đ - Trở lên
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
             </div>
-            <Box display="flex" justifyContent="center">
-                <Pagination page={currentPage} onChange={handleChange} shape="rounded" count={totalPage} color="secondary" />
-            </Box>
+            <div className='col-md-8 p-0'>
+                <div className={"row mb-4 mt-4 "}>
+                    {
+                        productList.map((book) => (
+                            <div className='col-md-3 book-hover'>
+                                <BookProps key={book.maSach} book={book} />
+                            </div>
+
+
+                        ))
+                    }
+                </div>
+                <Box display="flex" justifyContent="center">
+                    <Pagination page={currentPage} onChange={handleChange} shape="rounded" count={totalPage} color="secondary" />
+                </Box>
+            </div>
         </div>
     );
 
