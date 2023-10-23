@@ -7,6 +7,8 @@ import HeaderBaner from './layouts/header-footer/HeaderBaner';
 import ListProduct from './layouts/product/ListProduct';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import About from './layouts/home/component/About';
+import ProductDetail from './layouts/product/component/ProductDetail';
+import NotFound404 from './layouts/ultils/NotFound404';
 
 function App() {
 
@@ -20,9 +22,10 @@ function App() {
 
             <Route path='/' element={<HomePage />} />
             <Route path='/san-phams' element={<ListProduct />} />
-            <Route path='/:maTheLoai' element={<About />} />
-            <Route path='/gioi-thieu' element={<About />} />
+            <Route path='/san-phams/:maSach' element={<ProductDetail/>} />
 
+            <Route path='/gioi-thieu' element={<About />} />
+            <Route path='/404notfound' element={<NotFound404 />} />
           </Routes>
           <Footer />
         </BrowserRouter>

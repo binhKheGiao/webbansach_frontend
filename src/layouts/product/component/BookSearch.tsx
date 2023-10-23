@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import BookModel from '../../../models/BookModel';
 import IImageModel from '../../../models/IImageModel';
 import { getAllImageByIdBook } from '../../../api/ImageAPI';
+import { Link } from 'react-router-dom';
 
 interface BookPropsInterface {
 
@@ -45,12 +46,18 @@ const BookSearch: React.FC<BookPropsInterface> = (props) => {
 
     return (
         <div>
-            <li className="px-4 bookSearchIteam border-0 list-group-item d-flex align-items-center">
-                
-                    <img width={'40px'}  src={`${bookAvata}`} alt="" className='' />
+            <Link className='' style={{ 'textDecoration': 'none', 'color': 'black' }} to={`/san-phams/${props.book.maSach}`}  >
+
+                <li className="px-4 bookSearchIteam border-0 list-group-item d-flex align-items-center">
+
+                    <img width={'40px'} src={`${bookAvata}`} alt="" className='' />
                     <span className='ms-4'> {props.book.tenSach}</span>
 
-            </li>
+
+
+                </li>
+            </Link>
+
 
         </div>
     )

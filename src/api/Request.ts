@@ -4,5 +4,6 @@ export  async function getRequest(url: string) {
     if (!response.ok) {
         throw new  Error(`Không thể truy cập ${url}`)
     }
+    
     return response.json();
 }

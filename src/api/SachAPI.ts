@@ -52,3 +52,21 @@ export async function getBookBySearchValue(value: string): Promise<ResultAPI> {
     return getBook(url);
 }
 
+export async function getBookById(bookId:number): Promise<BookModel | null> {
+    const url = `http://localhost:8080/sach/${bookId}`;
+
+    
+
+    let result: BookModel;
+
+    try {
+        const response = await getRequest(url);
+    
+        return response;
+
+    } catch (error) {
+      
+        throw new Error('Không thể lấy được sách')
+    }
+
+}
