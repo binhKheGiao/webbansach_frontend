@@ -6,6 +6,7 @@ import { getAllImageByIdBook } from '../../api/ImageAPI';
 import '../header-footer/header-footer.scss'
 import BookSearch from '../product/component/BookSearch';
 import { debounce } from '@mui/material';
+import { Search } from 'react-bootstrap-icons';
 
 
 
@@ -100,8 +101,8 @@ const Navbar = () => {
 
         {/* Tìm kiếm */}
         <form className="d-flex position-relative">
-          <input className="form-control input-search me-2" onChange={onSearchInputChange} type="search" placeholder="Tìm kiếm" aria-label="Search" />
-          <button className="btn btn-danger" type="submit">Search</button>
+          <input className="form-control input-search me-4" onChange={onSearchInputChange} type="search" placeholder="Tìm kiếm" aria-label="Search" />
+          <button className="btn btn-danger" type="submit"> <Search/> </button>
           <div className={` ${querySearch == '' ? ' ' : ''} hidden position-absolute top-100 border rounded-3  ulsearch-nav`}>
 
             <ul className="list-group  ">
@@ -134,6 +135,7 @@ const Navbar = () => {
         </ul>
       </div>
     </nav>
+    
 
   )
 

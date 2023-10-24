@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
-import Book from "../../../models/Book";
 import BookModel from "../../../models/BookModel";
-import ImageModel from "../../../models/ImageModel";
 import { getAllImageByIdBook } from "../../../api/ImageAPI";
 import IImageModel from "../../../models/IImageModel";
 import { Link } from 'react-router-dom';
+import DangTaiDuLieuComponent from '../../ultils/DangTaiDuLieuComponent';
+import renderRaiting from '../../ultils/renderRaiting';
 
 interface BookPropsInterface {
 
@@ -24,9 +23,6 @@ const BookProps: React.FC<BookPropsInterface> = (props) => {
 
     const [error, setError] = useState(null);
 
-
-
-
     useEffect(() => {
         getAllImageByIdBook(bookId).then(
             imageData => {
@@ -35,7 +31,6 @@ const BookProps: React.FC<BookPropsInterface> = (props) => {
             }
         ).catch(
             error => {
-
                 setError(error.message);
             }
         );
@@ -44,9 +39,9 @@ const BookProps: React.FC<BookPropsInterface> = (props) => {
 
     if (loadingData) {
         return (
-            <div>
-                <h1>Đang tải dữ liệu</h1>
-            </div>
+            <>
+                <DangTaiDuLieuComponent />
+            </>
         )
     }
 
@@ -82,16 +77,17 @@ const BookProps: React.FC<BookPropsInterface> = (props) => {
     return (
         <div >
             <div className="card border-0 p-2 ">
-                <Link className='' style={{ 'textDecoration': 'none', 'color':'black' }}  to={`/san-phams/${props.book.maSach}`}  >
-                    <img 
+                <Link className='' style={{ 'textDecoration': 'none', 'color': 'black', 'minWidth' : '100%' }} to={`/san-phams/${props.book.maSach}`}  >
+                    <img
                         src={`${bookAvata}`}
-                        className="card-img-top d-block ms-auto me-auto"
+                        className="card-img-top  d-block ms-auto me-auto"
                         alt={""}
-                        style={{ height: '200px', width: '180px' }}
+                        style={{ height: '175px', width: '158px' }}
                     />
                     <div className="card-body">
                         <h6 className="card-title text-truncate">{props.book.tenSach}</h6>
                         <p className="card-text  text-truncate">{props.book.moTa}</p>
+                        <strong>{renderRaiting(props.book.trungBinhXepHang?props.book.trungBinhXepHang: 5)}</strong>
                         <div className="price d-block">
                             <span className="original-price">
                                 <strong className={'text-danger text-orgin-price'}>
@@ -113,7 +109,7 @@ const BookProps: React.FC<BookPropsInterface> = (props) => {
 
 
                 <div className="d-flex align-items-center  p-0 justify-content-around" role="group">
-                    <div className=" p-0">
+                    {/* <div className=" p-0">
                         <a href="#" className="btn  btn-secondary btn-block">
                             <i className="fas fa-heart"></i>
 
@@ -123,7 +119,7 @@ const BookProps: React.FC<BookPropsInterface> = (props) => {
                         <button className="btn btn-danger btn-block">
                             <i className="fas fa-shopping-cart"></i>
                         </button>
-                    </div>
+                    </div> */}
                 </div>
 
 

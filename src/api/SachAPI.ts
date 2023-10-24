@@ -1,9 +1,17 @@
 import BookModel from "../models/BookModel";
 import { getRequest } from "./Request";
 import { promises } from "dns";
-import ResultAPI from "./ResultAPI";
+
 import { log } from "console";
 
+
+interface ResultAPI {
+    result : BookModel[];
+    totalPage: number;
+    totalBook : number;
+}
+
+export default ResultAPI;
 
 async function getBook(url: string): Promise<ResultAPI> {
 

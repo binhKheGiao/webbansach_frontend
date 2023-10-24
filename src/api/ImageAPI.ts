@@ -1,10 +1,10 @@
-import BookModel from "../models/BookModel";
+
 import {getRequest} from "./Request";
-import ImageModel from "../models/ImageModel";
+import IImageModel from "../models/IImageModel";
 
 
-export async function getAllImageByIdBook(bookId:number):Promise<ImageModel[]> {    // Hoạt động bất đồng bộ lấy ra toàn bộ sách
-    const result:ImageModel[] = []; // Biến lưu giá trị trả về
+export async function getAllImageByIdBook(bookId:number):Promise<IImageModel[]> {    // Hoạt động bất đồng bộ lấy ra toàn bộ sách
+    const result:IImageModel[] = []; // Biến lưu giá trị trả về
 
     const uri:string = `http://localhost:8080/sach/${bookId}/danhSachHinhAnh`;
 

@@ -5,10 +5,10 @@ import error = Simulate.error;
 import { getAllBooks } from "../../../api/SachAPI";
 import BookModel from "../../../models/BookModel";
 import BookProps from "../../product/component/BookProps";
-import ResultAPI from "../../../api/ResultAPI";
 
 
-interface Props { fetchBooks: () => Promise<ResultAPI>; }
+
+interface Props { fetchBooks: () => Promise<any>; }
 
 //  Nếu không FeaturedProducts: React.FC<Props> nếu không thì sẽ chỉ là component rỗng
 const FeaturedProducts: React.FC<Props> = ({ fetchBooks }) => {

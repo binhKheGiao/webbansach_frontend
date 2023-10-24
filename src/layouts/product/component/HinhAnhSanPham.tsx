@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import ImageModel from '../../../models/ImageModel';
-import IImageModel from '../../../models/IImageModel';
-import { Carousel } from 'react-responsive-carousel';
 import { getAllImageByIdBook } from '../../../api/ImageAPI';
-import { error } from 'console';
+
+import IImageModel from "../../../models/IImageModel";
+import DangTaiDuLieuComponent from '../../ultils/DangTaiDuLieuComponent';
 
 interface HinhAnhSanPham {
     maSach: number;
@@ -18,20 +17,20 @@ const HinhAnhSanPham: React.FC<HinhAnhSanPham> = (props) => {
 
     const [baoLoi, setBaoLoi] = useState(null);
 
-    const [selectedImage, setSelectedImage] = useState<ImageModel | null>(null);
+    const [selectedImage, setSelectedImage] = useState<IImageModel | null>(null);
 
-    const [danhSachAnh, setDanhSachAnh] = useState<ImageModel[]>([]);
+    const [danhSachAnh, setDanhSachAnh] = useState<IImageModel[]>([]);
 
-    const [hinhAnhDangChon, setHinhAnhDangChon] = useState<ImageModel | null>(null);
+    const [hinhAnhDangChon, setHinhAnhDangChon] = useState<IImageModel | null >(null);
 
-    const [hinhAnhTruocDo, setHinhAnhTruocDo] = useState<ImageModel | null>(null);
+    const [hinhAnhTruocDo, setHinhAnhTruocDo] = useState<IImageModel | null>(null);
     // gọi hàm thay đổi hình ảnh đang chọn
-    const chonAnh = (image: ImageModel) => {
+    const chonAnh = (image: IImageModel) => {
         setHinhAnhDangChon(image);
         setHinhAnhTruocDo(image);
         setSelectedImage(image)
     }
-    const hoverImage = (image: ImageModel) => {
+    const hoverImage = (image: IImageModel) => {
         setHinhAnhDangChon(image);
     }
 
@@ -48,11 +47,14 @@ const HinhAnhSanPham: React.FC<HinhAnhSanPham> = (props) => {
                     });
                     setDangTaiDuLieu(false);
                 }
+                if (data.length == 0) {
+                    setDangTaiDuLieu(true);
+                }
             }
         ).catch(
             error => {
-                setBaoLoi(baoLoi);
 
+                setBaoLoi(baoLoi);                
             }
         )
 
@@ -60,9 +62,9 @@ const HinhAnhSanPham: React.FC<HinhAnhSanPham> = (props) => {
 
     if (dangTaiDuLieu) {
         return (
-            <div>
-                <h1>Đang tải dữ liệu</h1>
-            </div>
+           <>
+            <DangTaiDuLieuComponent/>
+           </>
         );
     }
 
@@ -76,7 +78,7 @@ const HinhAnhSanPham: React.FC<HinhAnhSanPham> = (props) => {
 
     return (
         <div className='row'>
-            <div className='overflow-hidden object-fit-contain'>
+            <div  className=' h-100 overflow-hidden object-fit-contain'>
                 {(hinhAnhDangChon) && <img className='mw-100' src={hinhAnhDangChon?.duLieuAnh} />}
             </div>
             <div>

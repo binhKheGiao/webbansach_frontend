@@ -9,6 +9,9 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import About from './layouts/home/component/About';
 import ProductDetail from './layouts/product/component/ProductDetail';
 import NotFound404 from './layouts/ultils/NotFound404';
+import NavbarBottom from './layouts/product/component/NavbarBottom';
+import ErrorPage from './layouts/erorr/ErrorPage';
+
 
 function App() {
 
@@ -18,6 +21,8 @@ function App() {
       <div className={'container'}>
         <BrowserRouter>
           <Navbar />
+          <NavbarBottom/>
+         
           <Routes>
 
             <Route path='/' element={<HomePage />} />
@@ -26,6 +31,7 @@ function App() {
 
             <Route path='/gioi-thieu' element={<About />} />
             <Route path='/404notfound' element={<NotFound404 />} />
+            <Route path='/error' element={<ErrorPage />} />
           </Routes>
           <Footer />
         </BrowserRouter>

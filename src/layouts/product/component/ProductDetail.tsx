@@ -4,6 +4,11 @@ import { useParams } from 'react-router-dom'
 import BookModel from '../../../models/BookModel';
 import { error } from 'console';
 import HinhAnhSanPham from './HinhAnhSanPham';
+import ProductReview from "./ProductReview";
+import DangTaiDuLieuComponent from '../../ultils/DangTaiDuLieuComponent';
+import renderRaiting from '../../ultils/renderRaiting';
+import formattedPrice from '../../ultils/formattedPrice';
+
 
 const ProductDetail = () => {
 
@@ -49,12 +54,9 @@ const ProductDetail = () => {
 
   if (dangTaiDuLieu) {
     return (
-      <div className='d-flex mt-5 mb-5 align-items-center justify-content-center'  >
-
-        <div className="spinner-border text-danger" role="status">
-          <span className="visually-hidden">Loading...</span>
-        </div>
-      </div>
+        <>
+          <DangTaiDuLieuComponent/>
+        </>
     )
   }
 
@@ -87,7 +89,8 @@ const ProductDetail = () => {
           <div className='row'>
             <div className='col-8'>
               <h1>{book.tenSach}</h1>
-              <h1>{book.trungBinhXepHang}</h1>
+              <h6>{renderRaiting(book.trungBinhXepHang?book.trungBinhXepHang : 0 )}</h6>
+              <h6>{formattedPrice(book.giaBan?book.giaBan : 0)}</h6>
               <div dangerouslySetInnerHTML={{__html:(book.moTa+'')}} ></div>
 
             </div>
@@ -98,8 +101,8 @@ const ProductDetail = () => {
 
         </div>
       </div>
-      <div>
-        Phần re view
+      <div>      
+        <ProductReview maSach={maSachNumber}/>
       </div>
     </div>
   )

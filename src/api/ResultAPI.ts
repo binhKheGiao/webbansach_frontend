@@ -6,4 +6,4 @@ interface ResultAPI {
     totalBook : number;
 }
 
-export default ResultAPI;
+// export default ResultAPI;

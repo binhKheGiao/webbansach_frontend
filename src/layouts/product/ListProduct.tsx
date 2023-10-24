@@ -3,10 +3,10 @@ import React, { useEffect, useState } from 'react';
 import BookProps from "./component/BookProps";
 import BookModel from "../../models/BookModel";
 import { getAllBooks } from "../../api/SachAPI";
-import { Simulate } from "react-dom/test-utils";
 import Pagination from "@mui/material/Pagination";
-import error = Simulate.error;
 import { Box } from '@mui/material';
+import DangTaiDuLieuComponent from '../ultils/DangTaiDuLieuComponent';
+import { Link } from 'react-router-dom';
 
 
 const ListProduct: React.FC = () => {
@@ -15,7 +15,9 @@ const ListProduct: React.FC = () => {
 
     const [dangTaiDuLieu, setDangTaiDuLieu] = useState(true);
 
-    const [baoLoi, setBaoLoi] = useState(null);
+    const [baoLoi, setBaoLoi] = useState(false);
+
+    const [messageBaoLoi, setMessageBaoLoi] = useState('');
 
     const [currentPage, setCurrentPage] = useState(1);
 
@@ -37,14 +39,17 @@ const ListProduct: React.FC = () => {
             data => {
                 setProductList(data.result);
                 setDangTaiDuLieu(false);
-                console.log("tổng số trang" + data.totalPage);
                 setTotalPage(data.totalPage);
                 window.scrollTo(0, 150)
 
             }
         ).catch(
             error => {
-                setBaoLoi(error.message)
+                setDangTaiDuLieu(false);
+                setBaoLoi(true);
+                
+
+                
             }
         )
 
@@ -52,27 +57,24 @@ const ListProduct: React.FC = () => {
 
     if (dangTaiDuLieu) {
         return (
-            <div className='d-flex align-items-center justify-content-center'  >
-
-                <div className="spinner-border text-danger" role="status">
-                    <span className="visually-hidden">Loading...</span>
-                </div>
-            </div>
+            <>
+                <DangTaiDuLieuComponent />
+            </>
         )
     }
 
     if (baoLoi) {
         return (
-
             <div>
-                <h1>Gặp lỗi : {baoLoi}</h1>
+                <h6>Có lỗi xảy ra </h6>
+                <Link to={'/'} >Home</Link>
             </div>
 
         )
     }
     return (
         <div className={'container row p-0'}>
-            <div className='col-md-4   p-4  p-0'>
+            <div className='col-md-2  p-4  p-0'>
                 <div className='ms-2  '>
                     <h6>Danh mục sản phẩm</h6>
                     <div className='ms-3 d-flex flex-column'>
@@ -97,49 +99,49 @@ const ListProduct: React.FC = () => {
                         </div>
                     </div>
                 </div>
-                <div className='ms-2'>
+                <div className='ms-1'>
                     <h6>Khoảng Giá</h6>
-                    <div className='ms-3'>
+                    <div className='ms-2'>
                         <div className="form-check">
 
                             <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
-                            <label className="form-check-label" >
+                            <small className="form-check-label" >
                                 0đ - 150,000đ
-                            </label>
+                            </small>
                         </div>
                         <div className="form-check">
                             <input className="form-check-input" type="checkbox" value="" id="flexCheckChecked" />
-                            <label className="form-check-label" >
+                            <small className="form-check-label" >
                                 150,000đ - 300,000đ
-                            </label>
+                            </small>
                         </div>
                         <div className="form-check">
                             <input className="form-check-input" type="checkbox" value="" id="flexCheckChecked" />
-                            <label className="form-check-label" >
+                            <small className="form-check-label" >
                                 300,000đ - 500,000đ
-                            </label>
+                            </small>
                         </div>
                         <div className="form-check">
                             <input className="form-check-input" type="checkbox" value="" id="flexCheckChecked" />
-                            <label className="form-check-label" >
+                            <small className="form-check-label" >
                                 500,000đ - 700,000đ
-                            </label>
+                            </small>
                         </div>
                         <div className="form-check">
                             <input className="form-check-input" type="checkbox" value="" id="flexCheckChecked" />
-                            <label className="form-check-label" >
+                            <small className="form-check-label" >
                                 700,000đ - Trở lên
-                            </label>
+                            </small>
                         </div>
                     </div>
                 </div>
 
             </div>
-            <div className='col-md-8 p-0'>
+            <div className='col-md-10 p-0'>
                 <div className={"row mb-4 mt-4 "}>
                     {
                         productList.map((book) => (
-                            <div className='col-md-3 book-hover'>
+                            <div className='col-md-3  book-hover'>
                                 <BookProps key={book.maSach} book={book} />
                             </div>
 
