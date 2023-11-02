@@ -11,6 +11,7 @@ import ProductDetail from './layouts/product/component/ProductDetail';
 import NotFound404 from './layouts/ultils/NotFound404';
 import NavbarBottom from './layouts/product/component/NavbarBottom';
 import ErrorPage from './layouts/erorr/ErrorPage';
+import DangKy from './layouts/user/DangKy';
 
 
 function App() {
@@ -28,6 +29,10 @@ function App() {
             <Route path='/' element={<HomePage />} />
             <Route path='/san-phams' element={<ListProduct />} />
             <Route path='/san-phams/:maSach' element={<ProductDetail/>} />
+
+            {/* Đăng kí */}
+
+            <Route path='/dangky' element={<DangKy />}/>
 
             <Route path='/gioi-thieu' element={<About />} />
             <Route path='/404notfound' element={<NotFound404 />} />

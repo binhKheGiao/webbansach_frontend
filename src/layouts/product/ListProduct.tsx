@@ -141,7 +141,7 @@ const ListProduct: React.FC = () => {
                 <div className={"row mb-4 mt-4 "}>
                     {
                         productList.map((book) => (
-                            <div className='col-md-3  book-hover'>
+                            <div className='col-md-3 book-hover'>
                                 <BookProps key={book.maSach} book={book} />
                             </div>
 

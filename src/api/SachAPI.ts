@@ -3,6 +3,7 @@ import { getRequest } from "./Request";
 import { promises } from "dns";
 
 import { log } from "console";
+import { baseUrl } from "../layouts/ultils/config";
 
 
 interface ResultAPI {
@@ -30,18 +31,18 @@ async function getBook(url: string): Promise<ResultAPI> {
 
 export async function getTheLatestBook(): Promise<ResultAPI> {
     // Lấy sản phẩm được bán ít nhất tháng trước ra làm flash sale hoặc là sản phẩm do admin set
-    const url: string = 'http://localhost:8080/sach?sort=maSach,asc&page=0&size=6';
+    const url: string = `${baseUrl}/sach?sort=maSach,asc&page=0&size=6`;
     return getBook(url);
 }
 export async function getFlashSaleBook(): Promise<ResultAPI> {
-    const url: string = 'http://localhost:8080/sach?sort=maSach,desc&page=0&size=6';
+    const url: string = `${baseUrl}/sach?sort=maSach,desc&page=0&size=6`;
     return getBook(url);
 }
 
 export async function getAllBooks(page: number): Promise<ResultAPI> {    // Hoạt động bất độ
     console.log("page ở call api" + page);
 
-    const url: string = `http://localhost:8080/sach?sort=maSach,desc&size=12&page=${page}`;
+    const url: string = `${baseUrl}/sach?sort=maSach,desc&size=12&page=${page}`;
 
     return getBook(url);
 }
@@ -52,7 +53,7 @@ export async function getBookBySearchValue(value: string): Promise<ResultAPI> {
     let url: string = `http://localhost:8080`;
 
     if (value !== '') {
-        url = `http://localhost:8080/sach/search/findByTenSachContaining?sort=maSach,desc&size=8&page=0&tenSach=${value}`;
+        url = `${baseUrl}/sach/search/findByTenSachContaining?sort=maSach,desc&size=8&page=0&tenSach=${value}`;
         console.log("Call api");
         
     }
@@ -61,7 +62,7 @@ export async function getBookBySearchValue(value: string): Promise<ResultAPI> {
 }
 
 export async function getBookById(bookId:number): Promise<BookModel | null> {
-    const url = `http://localhost:8080/sach/${bookId}`;
+    const url = `${baseUrl}/sach/${bookId}`;
 
     
 

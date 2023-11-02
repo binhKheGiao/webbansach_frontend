@@ -1,4 +1,4 @@
-import { Star, StarFill } from "react-bootstrap-icons";
+import { Star, StarFill, StarHalf } from "react-bootstrap-icons";
 
 const renderRaiting = (point:number) => {
     const stars = [];
@@ -6,7 +6,12 @@ const renderRaiting = (point:number) => {
         if (i<=point) {
             stars.push(<StarFill className='text-warning'/>)
         }else {
-            stars.push(<Star className='text-secondary'/>)
+
+            if (point> (i -1)+(0.2)) {
+                stars.push(<StarHalf className="text-warning"/>)
+            }else{
+                stars.push(<Star className='text-warning'/>)
+            }
         }
     }
     return stars;

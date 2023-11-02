@@ -76,11 +76,11 @@ const BookProps: React.FC<BookPropsInterface> = (props) => {
 
     return (
         <div >
-            <div className="card border-0 p-2 ">
+            <div className="card  border-0 p-2 ">
                 <Link className='' style={{ 'textDecoration': 'none', 'color': 'black', 'minWidth' : '100%' }} to={`/san-phams/${props.book.maSach}`}  >
                     <img
                         src={`${bookAvata}`}
-                        className="card-img-top  d-block ms-auto me-auto"
+                        className="card-img-top d-block ms-auto me-auto"
                         alt={""}
                         style={{ height: '175px', width: '158px' }}
                     />
